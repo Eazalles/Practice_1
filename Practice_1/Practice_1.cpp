@@ -5,9 +5,6 @@
 
 using namespace std;
 
-const int maximumElementCount = 10;
-int currentElementCount = 3;
-
 struct Date {
 	int day;
 	int month;
@@ -99,10 +96,10 @@ void Draw(struct Record* records, int elementCount) {
 	cout.width(width + 1); cout.fill('-'); cout << "-" << endl;
 }
 
-void insertMaximumRecord(struct Record* Table) {
-	if (currentElementCount < maximumElementCount) {
-		currentElementCount = currentElementCount + 1;
-		Table[currentElementCount - 1] = { "BRUH", "BRUH",  9999, 'B', {12,12,9999} };
+void insertMaximumRecord(struct Record* Table, int *currentElementCount, int maximumElementCount) {
+	if (*currentElementCount < maximumElementCount) {
+		*currentElementCount = *currentElementCount + 1;
+		Table[*currentElementCount - 1] = { "BRUH", "BRUH",  9999, 'B', {12,12,9999} };
 	}
 	else {
 		cout << "Недостаточно места" << endl;
@@ -114,12 +111,15 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
+	const int maximumElementCount = 10;
+	int currentElementCount = 3;
+
 	struct Record Table[10];
 	Table[0] = { "Сенкевич", "Потоп", 1978, 'Х', {11,11,2020} };
 	Table[1] = { "Ландау", "Механика", 1989, 'У', {11,11,2020} };
 	Table[2] = { "Дойль", "Сумчатые",  1990, 'C', {12,12,2010} };
 
 	Draw(Table, currentElementCount);
-	insertMaximumRecord(Table);
+	insertMaximumRecord(Table, &currentElementCount, maximumElementCount);
 	Draw(Table, currentElementCount);
 }
